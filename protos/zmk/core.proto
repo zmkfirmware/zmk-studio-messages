@@ -1,0 +1,29 @@
+syntax = "proto3";
+
+package zmk.core;
+
+enum LockState {
+    ZMK_STUDIO_CORE_LOCK_STATE_LOCKED = 0;
+    ZMK_STUDIO_CORE_LOCK_STATE_UNLOCKING = 1;
+    ZMK_STUDIO_CORE_LOCK_STATE_UNLOCKED = 2;
+}
+
+message Request {
+    oneof request_type {
+        bool get_lock_state = 1;
+        bool request_unlock = 2;
+        bool lock = 3;
+    }
+}
+
+message Response {
+    oneof response_type {
+        LockState get_lock_state = 1;
+    }
+}
+
+message Notification {
+    oneof notification_type {
+        LockState lock_state_changed = 1;
+    }
+}
