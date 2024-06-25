@@ -49,7 +49,10 @@ message BehaviorParameterValueDescriptionRange {
 
 message BehaviorParameterNil {}
 message BehaviorParameterLayerIndex {}
-message BehaviorParameterHidUsage {}
+message BehaviorParameterHidUsage {
+	uint32 keyboard_max = 1;
+	uint32 consumer_max = 2;
+}
 
 message BehaviorParameterValueDescription {
     string name = 1;
