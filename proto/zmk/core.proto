@@ -10,16 +10,23 @@ enum LockState {
 
 message Request {
     oneof request_type {
-        bool get_lock_state = 1;
-        bool request_unlock = 2;
-        bool lock = 3;
+        bool get_device_info = 1;
+        bool get_lock_state = 2;
+        bool request_unlock = 3;
+        bool lock = 4;
     }
 }
 
 message Response {
     oneof response_type {
-        LockState get_lock_state = 1;
+        GetDeviceInfoResponse get_device_info = 1;
+        LockState get_lock_state = 2;
     }
+}
+
+message GetDeviceInfoResponse {
+    string name = 1;
+    bytes serial_number = 2;
 }
 
 message Notification {
