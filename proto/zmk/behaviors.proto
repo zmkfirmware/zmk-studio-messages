@@ -33,7 +33,7 @@ message GetBehaviorDetailsResponse {
 enum BehaviorBindingParameterStandardDomain {
     NIL = 0;
     HID_USAGE = 1;
-    LAYER_INDEX = 2;
+    LAYER_ID = 2;
     // HSV_VALUE = 3;
 }
 
@@ -48,7 +48,7 @@ message BehaviorParameterValueDescriptionRange {
 }
 
 message BehaviorParameterNil {}
-message BehaviorParameterLayerIndex {}
+message BehaviorParameterLayerId {}
 message BehaviorParameterHidUsage {
 	uint32 keyboard_max = 1;
 	uint32 consumer_max = 2;
@@ -62,6 +62,6 @@ message BehaviorParameterValueDescription {
         uint32 constant = 3;
         BehaviorParameterValueDescriptionRange range = 4;
         BehaviorParameterHidUsage hid_usage = 5;
-        BehaviorParameterLayerIndex layer_index = 6;
+        BehaviorParameterLayerId layer_id = 6;
     }
 }

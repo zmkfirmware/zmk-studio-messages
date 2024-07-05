@@ -64,19 +64,19 @@ message MoveLayerResponse {
 
 enum SetActivePhysicalLayoutErrorCode {
     GENERIC = 0;
-    INVALID_LAYER_INDEX = 1;
+    INVALID_LAYOUT_INDEX = 1;
 }
 
 message SetLayerBindingRequest {
-    int32 layer = 1;
+    uint32 layer_id = 1;
     int32 key_position = 2;
 
     BehaviorBinding binding = 3;
 }
 
 message MoveLayerRequest {
-    uint32 layer = 1;
-    uint32 dest = 2;
+    uint32 start_index = 1;
+    uint32 dest_index = 2;
 }
 
 message Keymap {
@@ -84,8 +84,9 @@ message Keymap {
 }
 
 message Layer {
-    string name = 1;
-    repeated BehaviorBinding bindings = 2;
+    uint32 id = 1;
+    string name = 2;
+    repeated BehaviorBinding bindings = 3;
 }
 
 message BehaviorBinding {
