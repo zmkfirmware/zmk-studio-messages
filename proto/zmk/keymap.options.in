@@ -1,0 +1,1 @@
+SetLayerPropsRequest.name max_size:${CONFIG_ZMK_KEYMAP_LAYER_NAME_MAX_LENGTH}

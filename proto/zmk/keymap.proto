@@ -12,6 +12,10 @@ message Request {
         bool get_physical_layouts = 6;
         uint32 set_active_physical_layout = 7;
         MoveLayerRequest move_layer = 8;
+        AddLayerRequest add_layer = 9;
+        RemoveLayerRequest remove_layer = 10;
+        RestoreLayerRequest restore_layer = 11;
+        SetLayerPropsRequest set_layer_props = 12;
     }
 }
 
@@ -25,6 +29,10 @@ message Response {
         PhysicalLayouts get_physical_layouts = 6;
         SetActivePhysicalLayoutResponse set_active_physical_layout = 7;
         MoveLayerResponse move_layer = 8;
+        AddLayerResponse add_layer = 9;
+        RemoveLayerResponse remove_layer = 10;
+        RestoreLayerResponse restore_layer = 11;
+        SetLayerPropsResponse set_layer_props = 12;
     }
 }
 
@@ -62,6 +70,60 @@ message MoveLayerResponse {
     }
 }
 
+message AddLayerResponse {
+    oneof result {
+        AddLayerResponseDetails ok = 1;
+        AddLayerErrorCode err = 2;
+    }
+}
+
+enum AddLayerErrorCode {
+    ADD_LAYER_ERR_SUCCESS = 0;
+    ADD_LAYER_ERR_GENERIC = 1;
+    ADD_LAYER_ERR_NO_SPACE = 2;
+}
+
+message AddLayerResponseDetails {
+    uint32 index = 1;
+    Layer layer = 2;
+}
+
+message RemoveLayerResponse {
+    oneof result {
+        RemoveLayerOk ok = 1;
+        RemoveLayerErrorCode err = 2;
+    }
+}
+
+message RemoveLayerOk {
+}
+
+enum RemoveLayerErrorCode {
+    REMOVE_LAYER_ERR_SUCCESS = 0;
+    REMOVE_LAYER_ERR_GENERIC = 1;
+    REMOVE_LAYER_ERR_INVALID_INDEX = 2;
+}
+
+message RestoreLayerResponse {
+    oneof result {
+        Layer ok = 1;
+        RestoreLayerErrorCode err = 2;
+    }
+}
+
+enum RestoreLayerErrorCode {
+    RESTORE_LAYER_ERR_SUCCESS = 0;
+    RESTORE_LAYER_ERR_GENERIC = 1;
+    RESTORE_LAYER_ERR_INVALID_ID = 2;
+    RESTORE_LAYER_ERR_INVALID_INDEX = 3;
+}
+
+enum SetLayerPropsResponse {
+    OK = 0;
+    ERR_GENERIC = 1;
+    ERR_INVALID_ID = 2;
+}
+
 enum SetActivePhysicalLayoutErrorCode {
     GENERIC = 0;
     INVALID_LAYOUT_INDEX = 1;
@@ -79,8 +141,26 @@ message MoveLayerRequest {
     uint32 dest_index = 2;
 }
 
+message AddLayerRequest {
+}
+
+message RemoveLayerRequest {
+    uint32 layer_index = 1;
+}
+
+message RestoreLayerRequest {
+    uint32 layer_id = 1;
+    uint32 at_index = 2;
+}
+
+message SetLayerPropsRequest {
+    uint32 layer_id = 1;
+    string name = 2;
+}
+
 message Keymap {
     repeated Layer layers = 1;
+    uint32 available_layers = 2;
 }
 
 message Layer {
