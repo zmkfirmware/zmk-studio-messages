@@ -43,10 +43,10 @@ message Notification {
 }
 
 enum SetLayerBindingResponse {
-    SUCCESS = 0;
-    INVALID_LOCATION = 1;
-    INVALID_BEHAVIOR = 2;
-    INVALID_PARAMETERS = 3;
+    SET_LAYER_BINDING_RESP_OK = 0;
+    SET_LAYER_BINDING_RESP_INVALID_LOCATION = 1;
+    SET_LAYER_BINDING_RESP_INVALID_BEHAVIOR = 2;
+    SET_LAYER_BINDING_RESP_INVALID_PARAMETERS = 3;
 }
 
 message SetActivePhysicalLayoutResponse {
@@ -57,7 +57,7 @@ message SetActivePhysicalLayoutResponse {
 }
 
 enum MoveLayerErrorCode {
-    MOVE_LAYER_ERR_SUCCESS = 0;
+    MOVE_LAYER_ERR_OK = 0;
     MOVE_LAYER_ERR_GENERIC = 1;
     MOVE_LAYER_ERR_INVALID_LAYER = 2;
     MOVE_LAYER_ERR_INVALID_DESTINATION = 3;
@@ -78,7 +78,7 @@ message AddLayerResponse {
 }
 
 enum AddLayerErrorCode {
-    ADD_LAYER_ERR_SUCCESS = 0;
+    ADD_LAYER_ERR_OK = 0;
     ADD_LAYER_ERR_GENERIC = 1;
     ADD_LAYER_ERR_NO_SPACE = 2;
 }
@@ -99,7 +99,7 @@ message RemoveLayerOk {
 }
 
 enum RemoveLayerErrorCode {
-    REMOVE_LAYER_ERR_SUCCESS = 0;
+    REMOVE_LAYER_ERR_OK = 0;
     REMOVE_LAYER_ERR_GENERIC = 1;
     REMOVE_LAYER_ERR_INVALID_INDEX = 2;
 }
@@ -112,21 +112,22 @@ message RestoreLayerResponse {
 }
 
 enum RestoreLayerErrorCode {
-    RESTORE_LAYER_ERR_SUCCESS = 0;
+    RESTORE_LAYER_ERR_OK = 0;
     RESTORE_LAYER_ERR_GENERIC = 1;
     RESTORE_LAYER_ERR_INVALID_ID = 2;
     RESTORE_LAYER_ERR_INVALID_INDEX = 3;
 }
 
 enum SetLayerPropsResponse {
-    OK = 0;
-    ERR_GENERIC = 1;
-    ERR_INVALID_ID = 2;
+    SET_LAYER_PROPS_RESP_OK = 0;
+    SET_LAYER_PROPS_RESP_ERR_GENERIC = 1;
+    SET_LAYER_PROPS_RESP_ERR_INVALID_ID = 2;
 }
 
 enum SetActivePhysicalLayoutErrorCode {
-    GENERIC = 0;
-    INVALID_LAYOUT_INDEX = 1;
+    SET_ACTIVE_PHYSICAL_LAYOUT_ERR_OK = 0;
+    SET_ACTIVE_PHYSICAL_LAYOUT_ERR_GENERIC = 1;
+    SET_ACTIVE_PHYSICAL_LAYOUT_ERR_INVALID_LAYOUT_INDEX = 2;
 }
 
 message SetLayerBindingRequest {
