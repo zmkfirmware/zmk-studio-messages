@@ -1,7 +1,7 @@
 // Requests
 syntax = "proto3";
 
-package zmk;
+package zmk.studio;
 
 import "meta.proto";
 import "core.proto";
