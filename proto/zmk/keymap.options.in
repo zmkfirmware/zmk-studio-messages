@@ -1,0 +1,1 @@
+zmk.keymap.SetLayerPropsRequest.name max_size:@CONFIG_ZMK_KEYMAP_LAYER_NAME_MAX_LEN@ fixed_length:true
