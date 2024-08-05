@@ -4,16 +4,14 @@ package zmk.core;
 
 enum LockState {
     ZMK_STUDIO_CORE_LOCK_STATE_LOCKED = 0;
-    ZMK_STUDIO_CORE_LOCK_STATE_UNLOCKING = 1;
-    ZMK_STUDIO_CORE_LOCK_STATE_UNLOCKED = 2;
+    ZMK_STUDIO_CORE_LOCK_STATE_UNLOCKED = 1;
 }
 
 message Request {
     oneof request_type {
         bool get_device_info = 1;
         bool get_lock_state = 2;
-        bool request_unlock = 3;
-        bool lock = 4;
+        bool lock = 3;
     }
 }
 
