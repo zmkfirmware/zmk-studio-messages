@@ -12,6 +12,7 @@ message Request {
         bool get_device_info = 1;
         bool get_lock_state = 2;
         bool lock = 3;
+        bool reset_settings = 4;
     }
 }
 
@@ -19,6 +20,7 @@ message Response {
     oneof response_type {
         GetDeviceInfoResponse get_device_info = 1;
         LockState get_lock_state = 2;
+        bool reset_settings = 4;
     }
 }
 
