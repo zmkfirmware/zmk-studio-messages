@@ -162,6 +162,7 @@ message SetLayerPropsRequest {
 message Keymap {
     repeated Layer layers = 1;
     uint32 available_layers = 2;
+    uint32 max_layer_name_length = 3;
 }
 
 message Layer {
