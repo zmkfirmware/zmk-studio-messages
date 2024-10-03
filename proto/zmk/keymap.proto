@@ -24,7 +24,7 @@ message Response {
         Keymap get_keymap = 1;
         SetLayerBindingResponse set_layer_binding = 2;
         bool check_unsaved_changes = 3;
-        bool save_changes = 4;
+        SaveChangesResponse save_changes = 4;
         bool discard_changes = 5;
         PhysicalLayouts get_physical_layouts = 6;
         SetActivePhysicalLayoutResponse set_active_physical_layout = 7;
@@ -40,6 +40,20 @@ message Notification {
     oneof notification_type {
         bool unsaved_changes_status_changed = 1;
     }
+}
+
+message SaveChangesResponse {
+    oneof result {
+        bool ok = 1;
+        SaveChangesErrorCode err = 2;
+    }
+}
+
+enum SaveChangesErrorCode {
+    SAVE_CHANGES_ERR_OK = 0;
+    SAVE_CHANGES_ERR_GENERIC = 1;
+    SAVE_CHANGES_ERR_NOT_SUPPORTED = 2;
+    SAVE_CHANGES_ERR_NO_SPACE = 3;
 }
 
 enum SetLayerBindingResponse {

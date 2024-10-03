@@ -30,13 +30,6 @@ message GetBehaviorDetailsResponse {
     repeated BehaviorBindingParametersSet metadata = 3;
 }
 
-enum BehaviorBindingParameterStandardDomain {
-    NIL = 0;
-    HID_USAGE = 1;
-    LAYER_ID = 2;
-    // HSV_VALUE = 3;
-}
-
 message BehaviorBindingParametersSet {
     repeated BehaviorParameterValueDescription param1 = 1;
     repeated BehaviorParameterValueDescription param2 = 2;
