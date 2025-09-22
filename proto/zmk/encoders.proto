@@ -18,7 +18,6 @@ message Response {
 		GetInfoResponse get_info = 1;
 		GetMappingResponse get_mapping = 2;
 		// set_mapping and clear_mapping return ZMK_RPC_NO_RESPONSE (meta.no_response = true)
-		// No explicit response fields needed
 	}
 }
 

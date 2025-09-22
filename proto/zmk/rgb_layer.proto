@@ -1,0 +1,74 @@
+// Copyright (c) 2025 The ZMK Contributors
+//
+// SPDX-License-Identifier: MIT
+
+syntax = "proto3";
+
+package zmk.rgb_layer;
+
+option java_multiple_files = true;
+option java_outer_classname = "RgbLayerProto";
+option java_package = "com.zmk.studio";
+
+import "meta.proto";
+
+// RGB Layer subsystem messages for per-layer RGB control
+message RgbLayerColor {
+    uint32 h = 1; // Hue (0-360)
+    uint32 s = 2; // Saturation (0-100)
+    uint32 b = 3; // Brightness (0-100)
+}
+
+message RgbLayerConfig {
+    RgbLayerColor color = 1;
+    uint32 effect = 2; // RGB effect ID (0-3: solid, breathe, spectrum, swirl)
+    uint32 brightness = 3; // Brightness (0-100)
+    bool enabled = 4; // Whether RGB is enabled for this layer
+}
+
+message GetInfoRequest {}
+
+message GetInfoResponse {
+    bool has_rgb_underglow = 1; // Whether RGB underglow hardware is available
+}
+
+message GetLayerRgbRequest {
+    uint32 layer_id = 1; // Layer ID to query (0-based)
+}
+
+message GetLayerRgbResponse {
+    optional RgbLayerConfig config = 1; // Current RGB config for the layer (optional if no custom config)
+}
+
+message SetLayerRgbRequest {
+    uint32 layer_id = 1; // Layer ID to set (0-based)
+    RgbLayerConfig config = 2; // RGB configuration to apply
+}
+
+message SetLayerRgbResponse {}
+
+message ClearLayerRgbRequest {
+    uint32 layer_id = 1; // Layer ID to clear (0-based)
+}
+
+message ClearLayerRgbResponse {}
+
+message Request {
+    oneof request_type {
+        GetInfoRequest get_info = 1;
+        GetLayerRgbRequest get_layer_rgb = 2;
+        SetLayerRgbRequest set_layer_rgb = 3;
+        ClearLayerRgbRequest clear_layer_rgb = 4;
+    }
+}
+
+message Response {
+    oneof response_type {
+        GetInfoResponse get_info = 1;
+        GetLayerRgbResponse get_layer_rgb = 2;
+        SetLayerRgbResponse set_layer_rgb = 3;
+        ClearLayerRgbResponse clear_layer_rgb = 4;
+        meta.ErrorConditions error = 5;
+    }
+}
+
