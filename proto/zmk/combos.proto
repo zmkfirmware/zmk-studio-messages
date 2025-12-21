@@ -1,0 +1,151 @@
+syntax = "proto3";
+
+package zmk.combos;
+
+import "keymap.proto";
+
+message Request {
+    oneof request_type {
+        bool get_combos = 1;
+        AddComboRequest add_combo = 2;
+        ComboIdRequest delete_combo = 3;
+        ComboPositionRequest set_combo_position_state = 4;
+        ComboIdRequest clear_combo_layers = 5;
+        ComboLayerRequest set_combo_layer_state = 6;
+        ComboSlowReleaseRequest set_combo_slow_release_state = 7;
+        ComboTimeoutRequest set_combo_timeout = 8;
+        ComboRequirePriorIdleRequest set_combo_require_prior_idle = 9;
+        ComboBindingRequest set_combo_binding = 10;
+    }
+}
+
+message Response {
+    oneof response_type {
+        GetCombosResponse get_combos = 1;
+        AddComboResponse add_combo = 2;
+        DeleteComboResponse delete_combo = 3;
+        ComboChangeResponse set_combo_position_state = 4;
+        ComboChangeResponse clear_combo_layers = 5;
+        ComboChangeResponse set_combo_layer_state = 6;
+        ComboChangeResponse set_combo_slow_release_state = 7;
+        ComboChangeResponse set_combo_timeout = 8;
+        ComboChangeResponse set_combo_require_prior_idle = 9;
+        ComboChangeResponse set_combo_binding = 10;
+    }
+}
+
+message Notification {
+    oneof notification_type {
+        bool unsaved_changes_status_changed = 1;
+    }
+}
+
+message Combo {
+  uint32 id = 1;
+  repeated uint32 positions = 2;
+  zmk.keymap.BehaviorBinding binding = 3;
+  uint32 timeout_ms = 4;
+  uint32 require_prior_idle_ms = 5;
+  uint32 layer_mask = 6;
+  bool slow_release = 7;
+}
+
+message Combos {
+  repeated Combo combos = 1;
+  uint32 free_combos = 2;
+}
+
+enum ComboErrorCode {
+  COMBO_ERROR_CODE_OK            = 0;
+  COMBO_ERROR_CODE_GENERIC       = 1;
+  COMBO_ERROR_CODE_NOT_SUPPORTED = 2;
+  COMBO_ERROR_CODE_NO_SPACE      = 3;
+  COMBO_ERROR_CODE_NOT_FOUND     = 4;
+  COMBO_ERROR_CODE_INVALID       = 5;
+}
+
+/*
+ * Adding combos will result in re-ordering, so clients should *not*
+ * depend on the returned order for consistent display, without first
+ * sorting on some field, preferrably the `id` field.
+ */
+message GetCombosResponse {
+  oneof result {
+    Combos ok = 1;
+    ComboErrorCode err = 2;
+  };
+}
+
+/*
+ * Combos have a minimum of 2 key positions to be usable,
+ * so when adding we expect exactly two key positions. Any
+ * additional key positions should be added after creation
+ * with `set_combo_position_state`
+ */
+message AddComboRequest {
+  repeated uint32 positions = 1;
+  zmk.keymap.BehaviorBinding binding = 2;
+  uint32 timeout_ms = 3;
+  uint32 require_prior_idle_ms = 4;
+  uint32 layer_mask = 5;
+  bool slow_release = 6;
+}
+
+message AddComboResponse {
+  oneof result {
+    uint32 ok_new_id = 1;
+    ComboErrorCode err = 2;
+  }
+}
+
+message ComboIdRequest {
+  uint32 id = 1;
+}
+
+message DeleteComboResponse {
+  oneof result {
+    bool ok = 1;
+    ComboErrorCode err = 2;
+  }
+}
+
+message ComboPositionRequest {
+  uint32 id = 1;
+  uint32 position = 2;
+  bool enabled = 3;
+}
+
+message ComboLayerRequest {
+  uint32 id = 1;
+  uint32 layer = 2;
+  bool enabled = 3;
+}
+
+message ComboTimeoutRequest {
+  uint32 id = 1;
+  uint32 timeout = 2;
+}
+
+message ComboRequirePriorIdleRequest {
+  uint32 id = 1;
+  uint32 require_prior_idle = 2;
+}
+
+
+message ComboSlowReleaseRequest {
+  uint32 id = 1;
+  bool enabled = 2;
+}
+
+message ComboBindingRequest {
+  uint32 id = 1;
+  zmk.keymap.BehaviorBinding binding = 2;
+}
+
+message ComboChangeResponse {
+  oneof result {
+    bool ok = 1;
+    ComboErrorCode err = 2;
+  }
+}
+
