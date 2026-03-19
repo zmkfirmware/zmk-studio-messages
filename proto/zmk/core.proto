@@ -13,6 +13,7 @@ message Request {
         bool get_lock_state = 2;
         bool lock = 3;
         bool reset_settings = 4;
+        uint32 trigger_haptic_indicator = 5;
     }
 }
 
@@ -21,6 +22,7 @@ message Response {
         GetDeviceInfoResponse get_device_info = 1;
         LockState get_lock_state = 2;
         bool reset_settings = 4;
+        bool trigger_haptic_indicator = 5;
     }
 }
 
